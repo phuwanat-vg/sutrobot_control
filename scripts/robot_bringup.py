@@ -52,7 +52,7 @@ class Robot():
         self.dx = Float32()
         self.dy = Float32()
         self.dtheta = Float32()
-        self.odom_pub = rospy.Publisher('sutrobot1/odom',Odometry, queue_size=20)
+        self.odom_pub = rospy.Publisher('odom',Odometry, queue_size=20)
         self.pose2D = Pose2D()
         self.actual_left_vel = 0.0
         self.actual_right_vel = 0.0
