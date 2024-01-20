@@ -1,0 +1,21 @@
+<launch>
+    <!-- Run sutrobot bringup -->
+    <node pkg = "sutrobot_control" type="robot_bringup.py" name = "sutrobot_node" />
+  
+    <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_imu"
+    args="0.054 0.0 0.08 0.0 0.0  0.0 /base_link /imu_link 50" />
+
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+    <rosparam command="load" file="$(find sutrobot_control)/params/ekf.yaml" />
+
+   
+    <remap from="odometry/filtered" to="odom"/>
+    <!--<remap from="accel/filtered" to=""/>-->
+ 
+  </node>
+
+    <!--<node pkg="tf" type="static_transform_publisher" name="base_footprint_to_laser"
+    args="-0.0609 0.0 0.19 0.0 0.0  0.0 /base_link /laser 40" />-->
+    
+    
+</launch>

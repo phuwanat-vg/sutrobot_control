@@ -1,13 +1,20 @@
 <launch>
   
-    <node name="rosserial" pkg = "rosserial_python" type="serial_node.py"
-     output="screen" args="/dev/ttyUSB0"/>
+    <!--<node name="rosserial" pkg = "rosserial_python" type="serial_node.py"
+     output="screen" args="/dev/ttyUSB0"/>-->
 
     <!-- Run sutrobot bringup -->
     <node pkg = "sutrobot_control" type="robot_bringup.py" name = "sutrobot_node" />
   
-    <!--<node pkg="tf" type="static_transform_publisher" name="base_footprint_to_laser"
-    args="-0.0609 0.0 0.19 0.0 0.0  0.0 /base_link /laser 40" />-->
+    <!--<node pkg="tf" type="static_transform_publisher" name="base_footprint_to_imu"
+    args="0.054 0.0 0.08 0.0 0.0  0.0 base_link imu_link 50" />-->
+
+    
+  
+     <include file="$(find ydlidar_ros_driver)/launch/TG.launch" />
+
+    <node pkg="tf" type="static_transform_publisher" name="base_footprint_to_laser"
+    args="-0.065 0.0 0.19 3.14159 0.0  0.0 /base_link /laser_frame 40" />
     
     
 </launch>
